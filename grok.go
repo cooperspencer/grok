@@ -250,6 +250,8 @@ func (g *Grok) ParseTyped(pattern string, text string) (map[string]interface{}, 
 						captures[name], _ = strconv.Atoi(match[i])
 					case "float":
 						captures[name], _ = strconv.ParseFloat(match[i], 64)
+					case "timestamp":
+						captures[name], _ = g.parseTime(match[i])
 					default:
 						return nil, fmt.Errorf("ERROR the value %s cannot be converted to %s", match[i], segmentType)
 					}
